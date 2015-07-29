@@ -16,12 +16,16 @@ from sklearn.cluster import k_means
 
 from elm import ELMClassifier, ELMRegressor, GenELMClassifier, GenELMRegressor
 from random_layer import RandomLayer, MLPRandomLayer, RBFRandomLayer, GRBFRandomLayer
+import numpy as np
+import pandas
+from matplotlib.pyplot import *
+
 
 # <codecell>
 
 def make_toy():
     x = np.arange(0.25,20,0.1)
-    y = x*np.cos(x)+0.5*sqrt(x)*np.random.randn(x.shape[0])
+    y = x*np.cos(x)+0.5*np.sqrt(x)*np.random.randn(x.shape[0])
     x = x.reshape(-1,1)
     y = y.reshape(-1,1)
     return x, y
@@ -43,8 +47,8 @@ def res_dist(x, y, e, n_runs=100, random_state=None):
 
     print "\nTime: %.3f secs" % (time() - start_time)
 
-    print "Test Min: %.3f Mean: %.3f Max: %.3f SD: %.3f" % (min(test_res), mean(test_res), max(test_res), std(test_res))
-    print "Train Min: %.3f Mean: %.3f Max: %.3f SD: %.3f" % (min(train_res), mean(train_res), max(train_res), std(train_res))
+    print "Test Min: %.3f Mean: %.3f Max: %.3f SD: %.3f" % (min(test_res), np.mean(test_res), max(test_res), np.std(test_res))
+    print "Train Min: %.3f Mean: %.3f Max: %.3f SD: %.3f" % (min(train_res), np.mean(train_res), max(train_res), np.std(train_res))
     print
     return (train_res, test_res)
 
